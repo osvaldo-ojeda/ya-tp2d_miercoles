@@ -264,8 +264,8 @@ Ahora, supongamos que tenemos un array people que contiene varios objetos person
      { name: 'Bob' }
      ];
 
-     const fullNames = people.map(function(person) {
-     return this.getFullName();
+     const fullNames = people.map(function(p) {
+     return this.getFullName.call(p);
      }, person);
 
      console.log(fullNames); // ["My name is John", "My name is Jane", "My name is Bob"]
