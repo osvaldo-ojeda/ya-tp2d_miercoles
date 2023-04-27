@@ -1,72 +1,33 @@
-const { saludar, chau } = require("./functions/saludar");
-const reducir= require("./functions/reducir")
-const cosas = require("./utils/cosas");
+function uno() {
+  console.log("console.log uno");
+  return "return uno"
+}
+function dos() {
+  setTimeout(() => {
+    console.log("console.log dos");
+  }, 1000);
+  return "return dos"
+}
+function tres(param) {
+  return new Promise((resolve, reject) => {
+    if (param) {
+      resolve(`Promesa tres cumplida, se paso el parametro ${param}`);
+    } else {
+      reject("promesa tres no cumplida, no hay parametros");
+    }
+  });
+}
+function cuatro() {
+  console.log("cuatro");
+}
 
-
-
-// copias superficiales
-const nombres = ["Juan", "Pablo", "Marina", ["Pepe", "pepo", "pipa"]];
-// const copiaNombres= nombres
-
-// copiaNombres[0]="Juanito"
-// console.log("🚀 ------------------------------------------------🚀")
-// console.log("🚀 copiaNombre:", copiaNombres)
-// console.log("🚀 nombres:", nombres)
-// console.log("🚀 ------------------------------------------------🚀")
-
-// esto es para Array
-const copiaSlice = nombres.slice(0, 2);
-copiaSlice[0] = "Pepe";
-
-// estos son para array y obj
-const copisSpreadObj = { ...nombres, ...copiaSlice };
-const copisSpreadArr = [...nombres, ...copiaSlice];
-
-const copiaObjetassign = Object.assign([], nombres);
-copiaObjetassign[3][1] = "Pepo";
-// console.log("🚀 -----------------------------------------------🚀");
-// console.log("🚀 nombres:", nombres);
-// console.log("🚀 copiaSlice:", copiaSlice);
-// console.log("🚀 copisSpreadObj:", copisSpreadObj);
-// console.log("🚀 copisSpreadArr:", copisSpreadArr);
-// console.log("🚀 copiaObjetassign:", copiaObjetassign);
-// console.log("🚀 -----------------------------------------------🚀");
-
-// Copias profundas
-
-const JSONstringify = JSON.stringify(nombres);
-const copiaJson = JSON.parse(JSONstringify);
-copiaJson[3][2] = "Pipa";
-
-const copiaStructured = structuredClone(nombres);
-// console.log("🚀 ---------------------------------------------🚀");
-// console.log("🚀  nombres:", nombres);
-// console.log("🚀  JSONstringify:", JSONstringify);
-// console.log("🚀  copiaJson:", copiaJson);
-// console.log("🚀  copiaStructured:", copiaStructured);
-// console.log("🚀 ---------------------------------------------🚀");
-
-// saludar()
-//  chau()
-// console.log(module)
-
-// const data={
-//   nombre:"Osvaldito",
-//   curso:"node"
-// }
-
-// let nombre="curso"
-// let element="obj"
-
-// data.apellido="Ojeda"
-// data.element=[]
-// data[element]={}
-
-// console.log(data)
-// console.log(data.nombre)
-// console.log(data["nombre"])
-// console.log(data[nombre])
-
-console.log(reducir(cosas));
-
-
+console.log("inicio");
+console.log(uno())
+console.log(dos())
+const esperandoTres=tres()
+  .then((data) =>console.log(data))
+  .catch((err) => console.log(err))
+  .finally(()=>console.log("Fin de la promesa"))
+  console.log(esperandoTres)
+cuatro();
+console.log("fin");
