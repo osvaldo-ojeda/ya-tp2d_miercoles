@@ -1,33 +1,36 @@
-function uno() {
-  console.log("console.log uno");
-  return "return uno"
-}
-function dos() {
-  setTimeout(() => {
-    console.log("console.log dos");
-  }, 1000);
-  return "return dos"
-}
-function tres(param) {
-  return new Promise((resolve, reject) => {
-    if (param) {
-      resolve(`Promesa tres cumplida, se paso el parametro ${param}`);
-    } else {
-      reject("promesa tres no cumplida, no hay parametros");
-    }
-  });
-}
-function cuatro() {
-  console.log("cuatro");
-}
+import http from "http";
 
-console.log("inicio");
-console.log(uno())
-console.log(dos())
-const esperandoTres=tres()
-  .then((data) =>console.log(data))
-  .catch((err) => console.log(err))
-  .finally(()=>console.log("Fin de la promesa"))
-  console.log(esperandoTres)
-cuatro();
-console.log("fin");
+const server = http.createServer((peticion, respuesta) => {
+  // const url = peticion.url;
+  // -------------------------------
+  // const { url } = peticion;
+  // const {method}=peticion
+  // -------------------------------
+  const { url, method } = peticion;
+  // console.log("🚀url:", url);
+  // console.log("method:", method);
+  if (url === "/") {
+    respuesta.writeHead(200);
+    respuesta.end(JSON.stringify("hola a nuestra pagina"));
+  } else if (url === "/nosotros") {
+    respuesta.writeHead(200);
+    respuesta.end(JSON.stringify("hola a nosotros"));
+  } else {
+    respuesta.writeHead(400);
+    respuesta.end("Not Found");
+  }
+
+  // respuesta.end(JSON.stringify({ nombre: "Ricky Martin" }));
+});
+
+server.listen(8080, () => {
+  console.log(`prueto ok http://localhost:8080/`);
+});
+
+// const nombre = "osval";
+// const obj = {
+//   name:nombre,
+// };
+// // console.log(obj.name);
+// const {name}=obj
+// console.log(name);
