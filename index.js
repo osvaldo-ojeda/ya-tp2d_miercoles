@@ -1,36 +1,15 @@
-import http from "http";
+import express from "express";
+const app = express();
 
-const server = http.createServer((peticion, respuesta) => {
-  // const url = peticion.url;
-  // -------------------------------
-  // const { url } = peticion;
-  // const {method}=peticion
-  // -------------------------------
-  const { url, method } = peticion;
-  // console.log("🚀url:", url);
-  // console.log("method:", method);
-  if (url === "/") {
-    respuesta.writeHead(200);
-    respuesta.end(JSON.stringify("hola a nuestra pagina"));
-  } else if (url === "/nosotros") {
-    respuesta.writeHead(200);
-    respuesta.end(JSON.stringify("hola a nosotros"));
-  } else {
-    respuesta.writeHead(400);
-    respuesta.end("Not Found");
-  }
 
-  // respuesta.end(JSON.stringify({ nombre: "Ricky Martin" }));
+//importaciones 
+import router from "./routes/index.js"
+
+//midlewares
+app.use(router)
+
+
+
+app.listen(8080, () => {
+  console.log("servidor ok http://localhost:8080/");
 });
-
-server.listen(8080, () => {
-  console.log(`prueto ok http://localhost:8080/`);
-});
-
-// const nombre = "osval";
-// const obj = {
-//   name:nombre,
-// };
-// // console.log(obj.name);
-// const {name}=obj
-// console.log(name);
