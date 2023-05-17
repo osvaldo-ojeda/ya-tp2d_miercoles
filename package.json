@@ -2,7 +2,7 @@
   "name": "ya-tp2d_miercoles",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "server.js",
   "type": "module",
   "scripts": {
     "start": "node .",
