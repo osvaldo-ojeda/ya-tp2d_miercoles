@@ -1,16 +1,14 @@
 import express from "express";
+// import 'dotenv/config'
+import config from "./config/config.js";
+import indexRoutes from "./routes/indexRoutes.js";
+import connection from "./connection/connection.js";
 const app = express();
 
-import router from "./routes/index.js";
-// import connection from "./connection/connection.js";
+const port = config.serverPort;
 
-//midleware de aplicacion
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-
-//midleware de rutas
-app.use(router);
-
-app.listen(8080, () => {
+//midlewares
+app.use(indexRoutes);
+app.listen(port, () => {
   console.log("server ok http://localhost:8080");
 });
