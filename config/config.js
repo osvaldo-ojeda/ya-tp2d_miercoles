@@ -1,13 +1,9 @@
 import "dotenv/config";
 
-const config = {
-  serverPort: process.env.SERVER_PORT,
-  database: process.env.DB_NAME,
-  username: process.env.DB_USERNAME,
-  password: process.env.DB_PASSWORD,
-  host: process.env.DB_HOST,
-  dialect: process.env.DB_DIALECT,
-  port: process.env.DB_PORT,
-};
-
-export default config;
+export const serverPort = process.env.SERVER_PORT;
+export const database = process.env.DB_NAME;
+export const username = process.env.DB_USERNAME;
+export const password = process.env.DB_PASSWORD;
+export const host = process.env.DB_HOST;
+export const dialect = process.env.DB_DIALECT;
+export const port = process.env.DB_PORT;

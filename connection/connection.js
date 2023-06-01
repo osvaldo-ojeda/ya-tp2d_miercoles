@@ -1,5 +1,12 @@
 import { Sequelize } from "sequelize";
-import config from "../config/config.js";
+import {
+  database,
+  username,
+  password,
+  host,
+  dialect,
+  port,
+} from "../config/config.js";
 
 // const database = process.env.DB_NAME;
 // const username = process.env.DB_USERNAME;
@@ -14,16 +21,11 @@ import config from "../config/config.js";
 //   port,
 // });
 
-const connection = new Sequelize(
-  config.database,
-  config.username,
-  config.password,
-  {
-    host: config.host,
-    dialect: config.dialect,
-    port: config.port,
-  }
-);
+const connection = new Sequelize(database, username, password, {
+  host,
+  dialect,
+  port,
+});
 
 try {
   await connection.authenticate();
