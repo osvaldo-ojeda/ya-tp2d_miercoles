@@ -8,6 +8,9 @@ User.init(
     nombre: {
       type: DT.STRING,
       allowNull: false,
+      validate:{
+        len:[2,20]
+      }
     },
     apellido: {
       type: DT.STRING,
@@ -16,6 +19,14 @@ User.init(
     telefono: {
       type: DT.STRING(15),
       allowNull: false,
+    },
+    email: {
+      type: DT.STRING(),
+      allowNull: false,
+      unique: true,
+      validate: {
+        isEmail: true,
+      },
     },
     password: {
       type: DT.STRING,

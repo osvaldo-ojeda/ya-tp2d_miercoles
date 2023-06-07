@@ -6,6 +6,8 @@ import connection from "./connection/connection.js";
 
 
 //midlewares
+app.use(express.json())
+app.use(express.urlencoded({extended:true}))
 app.use(indexRoutes);
 
 await connection.sync({ force: true }).then(() => {
