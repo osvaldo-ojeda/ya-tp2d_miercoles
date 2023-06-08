@@ -5,9 +5,7 @@ import UserController from "../Controllers/UserController.js";
 const userController = new UserController();
 
 userRoutes.get("/", userController.getAllUsers);
-userRoutes.get("/:id", (req, res) => {
-  res.send("gel all users");
-});
+userRoutes.get("/:id",userController.getUserById);
 userRoutes.post("/", userController.createUser);
 userRoutes.put("/:id", (req, res) => {
   res.send("gel all users");

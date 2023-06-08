@@ -32,10 +32,15 @@ User.init(
       type: DT.STRING,
       allowNull: false,
     },
+    roleId:{
+      type:DT.INTEGER(), 
+      // allowNull:false,
+    }
   },
   {
     sequelize: connection,
     modelName: "User",
+    timestamps:false
   }
 );
 
