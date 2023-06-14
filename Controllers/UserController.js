@@ -1,16 +1,18 @@
-import { User } from "../Models/index.js";
+import { User, Role } from "../Models/index.js";
 
 class UserController {
   constructor() {}
   createUser = async (req, res, next) => {
     try {
-      const { nombre, apellido, telefono, email, password } = req.body;
+      
+      const { nombre, apellido, telefono, email, password, roleId } = req.body;
       const result = await User.create({
         nombre,
         apellido,
         telefono,
         email,
         password,
+        roleId,
       });
       if (!result) throw new Error("no se pudo crear el usuario");
       res
@@ -25,6 +27,13 @@ class UserController {
     try {
       const result = await User.findAll({
         attributes: ["id", "nombre", "apellido", "email", "roleId"],
+        // include:Role
+        include:[{
+          model:Role,
+          attributes:["role"],
+          as:"role"
+        }]
+        
       });
       if (result.length === 0) {
         const error = new Error("no hay usuarios");

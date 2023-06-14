@@ -1,7 +1,6 @@
 {
   "name": "ya-tp2d_miercoles",
   "version": "1.0.0",
-  "description": "",
   "main": "server.js",
   "type": "module",
   "scripts": {
@@ -13,9 +12,11 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "bcrypt": "^5.1.0",
     "dotenv": "^16.1.3",
     "express": "^4.18.2",
     "mysql2": "^3.3.3",
     "sequelize": "^6.31.1"
-  }
+  },
+  "description": ""
 }

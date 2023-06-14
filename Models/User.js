@@ -1,6 +1,6 @@
 import { DataTypes as DT, Model } from "sequelize";
 import connection from "../connection/connection.js";
-
+import bcrypt from "bcrypt";
 class User extends Model {}
 
 User.init(
@@ -8,9 +8,9 @@ User.init(
     nombre: {
       type: DT.STRING,
       allowNull: false,
-      validate:{
-        len:[2,20]
-      }
+      validate: {
+        len: [2, 20],
+      },
     },
     apellido: {
       type: DT.STRING,
@@ -29,19 +29,37 @@ User.init(
       },
     },
     password: {
-      type: DT.STRING,
+      type: DT.STRING(),
       allowNull: false,
     },
-    roleId:{
-      type:DT.INTEGER(), 
+    salt: {
+      type: DT.STRING(),
+    },
+    roleId: {
+      type: DT.INTEGER(),
       // allowNull:false,
-    }
+      defaultValue: 2,
+    },
   },
   {
     sequelize: connection,
     modelName: "User",
-    timestamps:false
+    timestamps: false,
   }
 );
+
+// // $2b$16$x8J9h3OxC5CEYgfvjnIwgu
+// console.log("🚀 salt:", salt);
+
+// const passwordHash = await bcrypt.hash("12345", salt);
+// console.log("🚀passwordHash:", passwordHash);
+
+User.beforeCreate(async (user) => {
+  const salt = await bcrypt.genSalt();
+  user.salt = salt;
+
+  const passwordHash = await bcrypt.hash(user.password, salt);
+  user.password = passwordHash;
+});
 
 export default User;
