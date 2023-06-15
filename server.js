@@ -23,7 +23,7 @@ app.use((error, req, res, next) => {
 // --------------------
 
 await connection
-  .sync({ force: true })
+  .sync({ force: false })
   .then(() => {
     app.listen(serverPort, () => {
       console.log("server ok http://localhost:8080");
