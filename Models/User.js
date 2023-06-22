@@ -56,12 +56,6 @@ User.init(
   }
 );
 
-// // $2b$16$x8J9h3OxC5CEYgfvjnIwgu
-// console.log("🚀 salt:", salt);
-
-// const passwordHash = await bcrypt.hash("12345", salt);
-// console.log("🚀passwordHash:", passwordHash);
-
 User.beforeCreate(async (user) => {
   const salt = await bcrypt.genSalt();
   user.salt = salt;

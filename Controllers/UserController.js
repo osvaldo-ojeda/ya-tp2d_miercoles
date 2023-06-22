@@ -1,4 +1,5 @@
 import { User, Role } from "../Models/index.js";
+import { generateToken, verifyToken } from "../utils/tokens.js";
 
 class UserController {
   constructor() {}
@@ -66,7 +67,7 @@ class UserController {
   };
   putUserById = async (req, res, next) => {
     try {
-      const result = await User;
+      const result = await User.update({});
       res.status(200).send({ success: true, message: "" });
     } catch (error) {
       res.status(400).send({ success: false, message: error.message });
@@ -89,16 +90,32 @@ class UserController {
         },
       });
       if (!result) throw new Error("Credeciales malas");
+
       const hash = await result.validatePassword(password);
-
       if (!hash) throw new Error("Credeciales malas");
-
+      const payload = {
+        id: result.id,
+        email: result.email,
+        roleId: result.roleId,
+      };
+      const token = generateToken(payload);
+      res.cookie("tokenMiercoles", token);
       res
         .status(200)
-        .send({ success: true, message: "Usuario logueado con exito" });
+        .send({ success: true, message: "Usuario logueado con exito", result });
+
+      console.log(res);
     } catch (error) {
       res.status(400).send({ success: false, message: error.message });
     }
+  };
+
+  me = async (req, res, next) => {
+    try {
+      const {tokenMiercoles}=req.cookies
+      const {payload}= verifyToken(tokenMiercoles)
+      res.status(200).send({ success: true, message: "Usuario", payload });
+    } catch (error) {}
   };
 }
 
