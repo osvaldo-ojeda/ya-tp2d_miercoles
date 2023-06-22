@@ -1,5 +1,5 @@
 import { User, Role } from "../Models/index.js";
-import { generateToken, verifyToken } from "../utils/tokens.js";
+import { generateToken} from "../utils/tokens.js";
 
 class UserController {
   constructor() {}
@@ -111,11 +111,17 @@ class UserController {
   };
 
   me = async (req, res, next) => {
-    try {
-      const {tokenMiercoles}=req.cookies
-      const {payload}= verifyToken(tokenMiercoles)
-      res.status(200).send({ success: true, message: "Usuario", payload });
-    } catch (error) {}
+    const {user}=req
+    res
+    .status(200)
+    .send({ success: true, message: "Usuario", user });
+  };
+
+  logout = async (req, res, next) => {  
+    res.cookie("tokenMiercoles", "")
+    res
+    .status(200)
+    .send({ success: true, message: "Usuario deslogueado"});
   };
 }
 
